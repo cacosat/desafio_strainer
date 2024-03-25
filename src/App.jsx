@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      
+      {/* Chat gpt grimoire */}
       <div className="flex flex-col h-screen">
       {/* Top bar */}
       <div className="flex items-center justify-between p-4 border-b-2">
@@ -56,6 +56,7 @@ function App() {
       </form>
     </div>
 
+    {/* Builder io build */}
     <div className="flex flex-col bg-white">
       <img
         loading="lazy"
