@@ -16,11 +16,7 @@ export default function Chat() {
         // Clear the input field, simulate response
         }
     };
-
     return <>
-        <div className="flex flex-col w-[45%] text-black">
-            dsfa
-        </div>
 
         {/* Chat gpt grimoire */}
         <div className="flex flex-col w-[512px] h-[600px]">
@@ -31,8 +27,8 @@ export default function Chat() {
                         <img src={smartupAgent} alt="Agent icon" />
                     </div>
                     <div className="flex flex-col justify-center mx-4 text-left">
-                        <span className="text-xl font-semibold tracking-tight">Agente Smartup</span>
-                        <div className="flex gap-2 items-center">
+                        <span className="text-md sm:text-xl font-semibold tracking-tight">Agente Smartup</span>
+                        <div className="hidden sm:flex gap-2 items-center">
                             <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="4" cy="4" r="4" fill="#03A400"/>
                             </svg>
@@ -40,7 +36,7 @@ export default function Chat() {
                         </div>
                     </div>
                 </div>
-                <button className="bg-dark-blue rounded-full p-2">
+                <button className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
                     <img src={restart} alt="restart conversation" />
                 </button>
             </div>
@@ -48,14 +44,11 @@ export default function Chat() {
             {/* Chat area */}
             <div className="flex flex-col justify-between flex-1 p-4">
                 <div className="overflow-y-auto">
-                {messages.map((message, index) => (
-                    <div key={index} className={`rounded p-2 ${message.sender === 'user' ? 'bg-blue-500 ml-auto' : 'bg-gray-300 mr-auto'}`}>
-                    {message.content}
-                    </div>
-                ))}
-                </div>
-                <div className="flex my-2">
-                {/* Insert buttons here */}
+                    {messages.map((message, index) => (
+                        <div key={index} className={`rounded p-2 ${message.sender === 'user' ? 'bg-blue-500 ml-auto' : 'bg-gray-300 mr-auto'}`}>
+                        {message.content}
+                        </div>
+                    ))}
                 </div>
             </div>
 
@@ -71,7 +64,7 @@ export default function Chat() {
                 </div>
                 <div className="flex items-center justify-between gap-4 bg-blue rounded-[50px] p-5">
                     <input type="text" name="messageInput" placeholder="Escribe tu mensaje..." className="flex-1 px-5 py-3 rounded-full bg-white border-gray border-2" />
-                    <button type="submit" className="bg-dark-blue rounded-full p-2">
+                    <button type="submit" className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
                     {/* Insert send icon here */}
                         <img src={send} alt="send message" />
                     </button>
