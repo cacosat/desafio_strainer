@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {useForm} from 'react-hook-form';
 import Badge from "./Badge";
 import rightBlue from "../assets/rightBlue.svg"
 
@@ -10,13 +11,7 @@ export default function Chat() {
         const badgeName = e.target.innerText;
     }
 
-    {/* TODO function producing the tags */}
-    function tags(data) {
-        // Converts user's answsers into tags
-        // should take the answer from a text input
-    }
-
-    {/* TODO function for handling the form */}
+    {/* TODO form validation and submission with react-hook-form */}
 
     return <>
         <div className="flex flex-col items-center m-4 overflow-x-hidden">
