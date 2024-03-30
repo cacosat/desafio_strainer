@@ -1,212 +1,205 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Badge from "./Badge";
+import rightBlue from "../assets/rightBlue.svg"
 
 export default function Chat() {
     // hooks + helper function
+    const handleBadgeDel = (e) => {
+        e.preventDefault();
+        const badgeName = e.target.innerText;
+    }
+
+    {/* TODO function producing the tags */}
 
     return <>
-        <div className="m-16 text-black">
-            <form action="">
-                {/* Placeholder */}
-                Form
-            </form>
-            <form className="space-y-8">
-                <section aria-labelledby="personal-information-section">
-                    <h2 className="text-xl font-semibold" id="personal-information-section">
-                        Información Personal
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex flex-col">
-                            <p className="text-md font-medium tracking-wide">Nombre</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Juan Pérez" /> */}
-                            <p className="text-sm font-light">Descripción</p>
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Teléfono</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="+56 9 1234 56789" /> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Email</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="ejemplo@gmail.com" type="email" /> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Dirección</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Santiago, Chile" /> */}
-                        </div>
-                    </div>
-                </section>
-                <section aria-labelledby="professional-information-section">
-                    <h2 className="text-xl font-semibold" id="professional-information-section">
-                        Información Profesional
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Competencias (separadas por comas)</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Ejemplo: Marketing, Tecnología, etc." /> */}
-                            <div className="flex space-x-2 mt-2">
-                                chip 1{" "}
-                                chip 2{" "}
-                                chip 3
-                                {/* <Badge variant="secondary">Marketing digital x</Badge>
-                                <Badge variant="secondary">SEO x</Badge>
-                                <Badge variant="secondary">Gestión de Redes Sociales x</Badge> */}
+        <div className="flex flex-col items-center m-4 overflow-x-hidden">
+            <form className="flex flex-col gap-8">
+                <div className="flex flex-col px-4 sm:px-8 py-4 sm:py-8 gap-16 max-w-[800px] text-left text-darker-gray bg-light-gray rounded-[25px] ">
+                    <section aria-labelledby="personal-information-section" className="flex flex-col gap-8"> {/* Accesibility */}
+                        {/* Información Personal */}
+                        <h2 className="text-2xl font-semibold" id="personal-information-section">
+                            Información Personal
+                        </h2>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-1">
+                                <p className="text-base font-medium">Nombre</p>
+                                {/* replace input */}
+                                <input type="text" placeholder="Escribe tu nombre y apellido" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                {/* <Input placeholder="Juan Pérez" /> */}
+                                {/* <p className="text-sm font-light">Descripción</p> */}
+                            </div>
+                            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+                                {/* Teléfono + email */}
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-base font-medium">Teléfono</p>
+                                    {/* replace input */}
+                                    <input type="text" placeholder="+56 9 1234 5678" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="+56 9 1234 56789" /> */}
+                                    {/* <p className="text-sm font-light">Descripción</p> */}
+                                </div>
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-base font-medium">Email</p>
+                                    {/* replace input */}
+                                    <input type="text" placeholder="Ciudad, País" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="ejemplo@gmail.com" type="email" /> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-1 md:max-w-[50%]">
+                                <p className="text-base font-medium">Ubicación</p>
+                                {/* replace input */}
+                                <input type="text" placeholder="Ciudad, País" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                {/* <Input placeholder="Santiago, Chile" /> */}
+                                <p className="text-xs font-light">Ingresa tu ubicación con el formato 'Ciudad, País'</p>
                             </div>
                         </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Años de experiencia</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="8 años" /> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Herramientas (separadas por comas)</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Ejemplo: Linkedin Recruiter, etc." /> */}
-                            <div className="flex space-x-2 mt-2">
-                                chip 1{" "}
-                                chip 2{" "}
-                                chip 3
-                                {/* <Badge variant="secondary">Google Analytics x</Badge>
-                                <Badge variant="secondary">Hubspot x</Badge> */}
+                    </section>
+                    <section aria-labelledby="professional-information-section" className="flex flex-col gap-8">
+                        <h2 className="text-2xl font-semibold" id="professional-information-section">
+                            Información Profesional
+                        </h2>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-base font-medium">Áreas de especialización (separadas por comas)</p>
+                                    <input type="text" placeholder="Ej.: Tecnología, Marketing, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="Ejemplo: Marketing, Tecnología, etc." /> */}
+                                    <p className="text-xs font-light">Ingresa tus áreas de especialización separadas por coma</p>
+                                    <div className="flex gap-2 space-x-2 mt-2">
+                                        {/* TODO function producing the tags */}
+                                        <Badge onClick={handleBadgeDel} name="Marketing digital" color="blue" />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-base font-medium">Años de experiencia</p>
+                                    {/* replace input */}
+                                    <input type="text" placeholder="Ej.: 8" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="8 años" /> */}
+                                    <p className="text-xs font-light">Ingresa únicamente el número de años</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+                                <div className="flex flex-col grow-[1] gap-1">
+                                    <p className="text-base font-medium">Certificaciones profesionales (separadas por comas)</p>
+                                    {/* replace input */}
+                                    <input type="text" placeholder="Ej.: LinkedIn Recruiter, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="Ejemplo: Linkedin Recruiter, etc." /> */}
+                                    <p className="text-xs font-light">Ingresa tus certificaciones y presiona la tecla enter</p>
+                                    <div className="flex gap-2 space-x-2 mt-2">
+                                        {/* TODO function producing the tags */}
+                                        <Badge onClick={handleBadgeDel} name="Google Analytics" color="yellow" />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col grow gap-1">
+                                    <p className="text-base font-medium">Idiomas (separados por comas)</p>
+                                    <input type="text" placeholder="Ej.: Inglés, Portugués, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    <p className="text-xs font-light">Ingresa los idiomas que manejas y presiona la tecla enter</p>
+                                    <div className="flex gap-2 space-x-2 mt-2">
+                                        {/* TODO function producing the tags */}
+                                        <Badge onClick={handleBadgeDel} name="Inglés" color="blue" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Idiomas (separados por comas)</p>
-                            select input
-                            {/* <Select>
-                            <SelectTrigger id="languages">
-                                <SelectValue placeholder="Ejemplo: Portugués, etc." />
-                            </SelectTrigger>
-                            <SelectContent position="popper">
-                                <SelectItem value="portuguese">Portugués</SelectItem>
-                                <SelectItem value="english">Inglés</SelectItem>
-                                <SelectItem value="spanish">Español</SelectItem>
-                            </SelectContent>
-                            </Select> */}
-                            <div className="flex space-x-2 mt-2">
-                                chip 1{" "}
-                                chip 2{" "}
-                                {/* <Badge variant="secondary">Inglés x</Badge>
-                                <Badge variant="secondary">Español x</Badge> */}
+                    </section>
+                    <section aria-labelledby="company-information-section" className="flex flex-col gap-8">
+                        <h2 className="text-2xl font-semibold" id="company-information-section">
+                            Información de la Empresa de Reclutamiento
+                        </h2>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-sm font-medium">Tipo de empresa</p>
+                                    <select name="tipoEmpresa" id="tipoEmpresa" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]">
+                                        <option value="independiente">Independiente</option>
+                                        <option value="option2">Opción 2</option>
+                                        <option value="option3">Opción 3</option>
+                                    </select>
+                                    <p className="text-xs font-light">Selecciona una de las opciones</p>
+                                </div>
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-sm font-medium">Nombre de la empresa</p>
+                                    {/* replace input */}
+                                    <input type="text" placeholder="Reclutadores CL" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    {/* <Input placeholder="Reclutadores CL" /> */}
+                                    <p className="text-xs font-light">Ingresa el nombre de tu agencia</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+                                <div className="flex flex-col grow-[1] gap-1 justify-start">
+                                    <p className="text-sm font-medium">Tamaño de la empresa</p>
+                                    <select name="tamañoEmpresa" id="tamañoEmpresa" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]">
+                                        <option value="0-10">0 - 10 empleados</option>
+                                        <option value="option2">Opción 2</option>
+                                        <option value="option3">Opción 3</option>
+                                    </select>
+                                    <p className="text-xs font-light">Selecciona una de las opciones</p>
+                                </div>
+                                <div className="flex flex-col grow gap-1 justify-start">
+                                    <p className="text-sm font-medium" >Ubicación</p>
+                                    <input type="text" placeholder="Cuentanos más sobre tu empresa" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                    <p className="text-xs font-light">Ingresa la ubicación de la sucursal principal</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-1 md:max-w-[50%]">
+                                <p className="text-sm font-medium">Paises Donde Opera</p>
+                                {/* replace input */}
+                                <input type="text" placeholder="Ej.: Perú, Ecuador, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                {/* <Input placeholder="Ejemplo: Perú, Ecuador, etc." /> */}
+                                <p className="text-xs font-light">Ingresa los paises donde operan separados por coma</p>
+                                <div className="flex space-x-2 mt-2">
+                                    <Badge onClick={handleBadgeDel} name="Chile" color="yellow" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <p className="text-sm font-medium">Descripción de la empresa</p>
+                                <textarea name="textarea" placeholder="Ingresa una descripción" id="descripcion" cols="30" rows="5" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]"></textarea>
+                                <p className="text-xs font-light">Ingresa una breve descripción de la empresa</p>
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section aria-labelledby="company-information-section">
-                    <h2 className="text-xl font-semibold" id="company-information-section">
-                        Información de la Empresa de Reclutamiento
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Tipo de empresa</p>
-                            select input
-                            {/* <Select>
-                            <SelectTrigger id="company-type">
-                                <SelectValue placeholder="Independiente" />
-                            </SelectTrigger>
-                            <SelectContent position="popper">
-                                <SelectItem value="independent">Independiente</SelectItem>
-                                <SelectItem value="agency">Agencia</SelectItem>
-                            </SelectContent>
-                            </Select> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Nombre de la empresa</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Reclutadores CL" /> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Tamaño de la empresa</p>
-                            select input
-                            {/* <Select>
-                            <SelectTrigger id="company-size">
-                                <SelectValue placeholder="0-10 empleados" />
-                            </SelectTrigger>
-                            <SelectContent position="popper">
-                                <SelectItem value="0-10">0-10 empleados</SelectItem>
-                                <SelectItem value="11-50">11-50 empleados</SelectItem>
-                            </SelectContent>
-                            </Select> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Ubicación</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Santiago, Chile" /> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Países en los que recluta (separados por comas)</p>
-                            {/* replace input */}
-                            <input type="text" />
-                            {/* <Input placeholder="Ejemplo: Perú, Ecuador, etc." /> */}
-                            <div className="flex space-x-2 mt-2">
-                                chip 1{" "}
-                                chip 2{" "}
-                                chip 3
-                                {/* <Badge variant="secondary">Chile x</Badge>
-                                <Badge variant="secondary">Argentina x</Badge>
-                                <Badge variant="secondary">México x</Badge> */}
+                    </section>
+
+                    <section aria-labelledby="competencias y herramientas" className="flex flex-col gap-8">
+                        <h2 className="text-2xl font-semibold" id="competenciasHerramientas">
+                            Competencias y Herramientas
+                        </h2>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-1">
+                                <p className="text-sm font-medium">Herramientas que Utiliza</p>
+                                <input type="text" placeholder="Ejemplo: Pruebas psicométricas, análisis de CV, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]"  />
+                                <p className="text-xs font-light">Ingresa las herramientas que utilizas separadas por comas</p>
+                                <div className="flex space-x-2 mt-2">
+                                    <Badge onClick={handleBadgeDel} color="blue" name="Metodología STAR" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <p className="text-sm font-medium">Metodologías de Evaluación de Candidatos</p>
+                                {/* replace input */}
+                                <input type="text" placeholder="Ejemplo: Laborum, trabajando.com, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
+                                {/* <Input placeholder="Ejemplo: Laborum, trabajando.com, etc." /> */}
+                                <p className="text-xs font-light">Ingresa las metodologías que utilizas separadas por comas</p>
+                                <div className="flex space-x-2 mt-2">
+                                    <Badge onClick={handleBadgeDel} color="yellow" name="LinkedIn Recruiter" />
+                                </div>
                             </div>
                         </div>
-                        <div className="flex flex-col">
-                            <p className="text-sm font-medium tracking-wide">Descripción de la empresa</p>
-                            <textarea name="textarea" placeholder="textarea" id="" cols="30" rows="10"></textarea>
-                            {/* <Textarea placeholder="Recruitment CL ofrece soluciones ágiles en la unión de talentos y empresas, destacando por su enfoque personalizado y su eficaz red profesional en múltiples industrias." /> */}
-                        </div>
-                    </div>
-                </section>
-                <section aria-labelledby="skills-and-tools-section">
-                    <h2 className="text-xl font-semibold" id="skills-and-tools-section">
-                    Competencias y Herramientas
-                    </h2>
-                    <div className="grid grid-cols-1 gap-4">
-                    <div className="flex flex-col">
-                        <p className="text-sm font-medium tracking-wide">Sitios web de reclutamiento (separados por comas)</p>
-                        {/* replace input */}
-                        <input type="text" />
-                        {/* <Input placeholder="Ejemplo: Laborum, trabajando.com, etc." /> */}
-                        <div className="flex space-x-2 mt-2">
-                            chip 1{" "}
-                            chip 2{" "}
-                            chip 3
-                            {/* <Badge variant="secondary">LinkedIn Recruiter x</Badge>
-                            <Badge variant="secondary">Indeed x</Badge>
-                            <Badge variant="secondary">Chile trabajos x</Badge>
-                            <Badge variant="secondary">Get on Board x</Badge> */}
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <p className="text-sm font-medium tracking-wide">Herramientas de reclutamiento (separadas por comas)</p>
-                        <input placeholder="Ejemplo: Pruebas psicométricas, análisis de CV, etc." />
-                        <div className="flex space-x-2 mt-2">
-                            chip{" "}
-                            chip{" "}
-                            {/* <Badge variant="secondary">Entrevistas por competencias x</Badge> */}
-                            {/* <Badge variant="secondary">Metodología STAR x</Badge> */}
-                        </div>
-                    </div>
-                    </div>
-                </section>
-                <div className="flex items-center mt-4">
-                    checkbox
-                    {/* <Checkbox id="terms" /> */}
-                    <label className="ml-2 text-sm font-medium" htmlFor="terms">
-                    Estoy de acuerdo con las respuestas emitidas por medio de este formulario.
-                    </label>
+                    </section>
                 </div>
-                <button>send</button>
+                <div className="flex flex-col justify-center gap-4 mx-4 text-darker-gray">
+                    <div className="flex gap-1">
+                        <input type="checkbox" id="terms" className="" />
+                        {/* <Checkbox id="terms" /> */}
+                        <label className="ml-2 text-sm font-medium" htmlFor="terms">
+                            Estoy de acuerdo con las respuestas emitidas por medio de este formulario.
+                        </label>
+                    </div>
+                    <button className="bg-blue active:bg-dark-blue text-white text-xl py-2 px-8 rounded-full flex items-center justify-center gap-2">
+                        Enviar formulario
+                        <div className="bg-yellow rounded-full">
+                            <img src={rightBlue} alt="" />
+                        </div>
+                    </button>
+                </div>
                 {/* <Button className="mt-4">Enviar formulario</Button> */}
             </form>
         </div>

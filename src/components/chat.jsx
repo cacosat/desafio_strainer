@@ -63,7 +63,7 @@ export default function Chat() {
                     pendiente los chips de respuesta
                 </div>
                 <div className="flex items-center justify-between gap-4 bg-blue rounded-[50px] p-5">
-                    <input type="text" name="messageInput" placeholder="Escribe tu mensaje..." className="flex-1 px-5 py-3 rounded-full bg-white border-gray border-2" />
+                    <input type="text" name="messageInput" placeholder="Escribe tu mensaje..." className="flex-1 px-5 py-3 placeholder-dark-gray text-darker-gray rounded-full bg-white border-gray border-2" />
                     <button type="submit" className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
                     {/* Insert send icon here */}
                         <img src={send} alt="send message" />
