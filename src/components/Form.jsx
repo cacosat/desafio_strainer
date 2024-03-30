@@ -11,45 +11,39 @@ export default function Chat() {
     }
 
     {/* TODO function producing the tags */}
+    function tags(data) {
+        // Converts user's answsers into tags
+        // should take the answer from a text input
+    }
+
+    {/* TODO function for handling the form */}
 
     return <>
         <div className="flex flex-col items-center m-4 overflow-x-hidden">
             <form className="flex flex-col gap-8">
                 <div className="flex flex-col px-4 sm:px-8 py-4 sm:py-8 gap-16 max-w-[800px] text-left text-darker-gray bg-light-gray rounded-[25px] ">
                     <section aria-labelledby="personal-information-section" className="flex flex-col gap-8"> {/* Accesibility */}
-                        {/* Información Personal */}
                         <h2 className="text-2xl font-semibold" id="personal-information-section">
                             Información Personal
                         </h2>
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-1">
                                 <p className="text-base font-medium">Nombre</p>
-                                {/* replace input */}
-                                <input type="text" placeholder="Escribe tu nombre y apellido" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                {/* <Input placeholder="Juan Pérez" /> */}
-                                {/* <p className="text-sm font-light">Descripción</p> */}
+                                <input type="text" placeholder="Juan Perez" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
                             </div>
                             <div className="flex flex-col md:flex-row justify-between w-full gap-4">
-                                {/* Teléfono + email */}
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-base font-medium">Teléfono</p>
-                                    {/* replace input */}
                                     <input type="text" placeholder="+56 9 1234 5678" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="+56 9 1234 56789" /> */}
-                                    {/* <p className="text-sm font-light">Descripción</p> */}
                                 </div>
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-base font-medium">Email</p>
-                                    {/* replace input */}
-                                    <input type="text" placeholder="Ciudad, País" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="ejemplo@gmail.com" type="email" /> */}
+                                    <input type="text" placeholder="ejemplo@gmail.com" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1 md:max-w-[50%]">
                                 <p className="text-base font-medium">Ubicación</p>
-                                {/* replace input */}
-                                <input type="text" placeholder="Ciudad, País" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                {/* <Input placeholder="Santiago, Chile" /> */}
+                                <input type="text" placeholder="Santiago, Chile" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
                                 <p className="text-xs font-light">Ingresa tu ubicación con el formato 'Ciudad, País'</p>
                             </div>
                         </div>
@@ -63,31 +57,22 @@ export default function Chat() {
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-base font-medium">Áreas de especialización (separadas por comas)</p>
                                     <input type="text" placeholder="Ej.: Tecnología, Marketing, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="Ejemplo: Marketing, Tecnología, etc." /> */}
                                     <p className="text-xs font-light">Ingresa tus áreas de especialización separadas por coma</p>
                                     <div className="flex gap-2 space-x-2 mt-2">
-                                        {/* TODO function producing the tags */}
-                                        <Badge onClick={handleBadgeDel} name="Marketing digital" color="blue" />
                                     </div>
                                 </div>
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-base font-medium">Años de experiencia</p>
-                                    {/* replace input */}
-                                    <input type="text" placeholder="Ej.: 8" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="8 años" /> */}
+                                    <input type="number" placeholder="Ej.: 8" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
                                     <p className="text-xs font-light">Ingresa únicamente el número de años</p>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between w-full gap-4">
                                 <div className="flex flex-col grow-[1] gap-1">
                                     <p className="text-base font-medium">Certificaciones profesionales (separadas por comas)</p>
-                                    {/* replace input */}
                                     <input type="text" placeholder="Ej.: LinkedIn Recruiter, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="Ejemplo: Linkedin Recruiter, etc." /> */}
                                     <p className="text-xs font-light">Ingresa tus certificaciones y presiona la tecla enter</p>
                                     <div className="flex gap-2 space-x-2 mt-2">
-                                        {/* TODO function producing the tags */}
-                                        <Badge onClick={handleBadgeDel} name="Google Analytics" color="yellow" />
                                     </div>
                                 </div>
                                 <div className="flex flex-col grow gap-1">
@@ -95,8 +80,6 @@ export default function Chat() {
                                     <input type="text" placeholder="Ej.: Inglés, Portugués, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
                                     <p className="text-xs font-light">Ingresa los idiomas que manejas y presiona la tecla enter</p>
                                     <div className="flex gap-2 space-x-2 mt-2">
-                                        {/* TODO function producing the tags */}
-                                        <Badge onClick={handleBadgeDel} name="Inglés" color="blue" />
                                     </div>
                                 </div>
                             </div>
@@ -119,9 +102,7 @@ export default function Chat() {
                                 </div>
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-sm font-medium">Nombre de la empresa</p>
-                                    {/* replace input */}
                                     <input type="text" placeholder="Reclutadores CL" className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                    {/* <Input placeholder="Reclutadores CL" /> */}
                                     <p className="text-xs font-light">Ingresa el nombre de tu agencia</p>
                                 </div>
                             </div>
@@ -145,10 +126,9 @@ export default function Chat() {
                                 <p className="text-sm font-medium">Paises Donde Opera</p>
                                 {/* replace input */}
                                 <input type="text" placeholder="Ej.: Perú, Ecuador, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]" />
-                                {/* <Input placeholder="Ejemplo: Perú, Ecuador, etc." /> */}
                                 <p className="text-xs font-light">Ingresa los paises donde operan separados por coma</p>
                                 <div className="flex space-x-2 mt-2">
-                                    <Badge onClick={handleBadgeDel} name="Chile" color="yellow" />
+                                    {/* <Badge onClick={handleBadgeDel} name="Chile" color="yellow" /> */}
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1">
@@ -169,7 +149,7 @@ export default function Chat() {
                                 <input type="text" placeholder="Ejemplo: Pruebas psicométricas, análisis de CV, etc." className="bg-white border-dark-gray placeholder-dark-gray text-darker-gray border-2 px-4 py-2 rounded-[20px]"  />
                                 <p className="text-xs font-light">Ingresa las herramientas que utilizas separadas por comas</p>
                                 <div className="flex space-x-2 mt-2">
-                                    <Badge onClick={handleBadgeDel} color="blue" name="Metodología STAR" />
+                                    {/* <Badge onClick={handleBadgeDel} color="blue" name="Metodología STAR" /> */}
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1">
@@ -179,7 +159,7 @@ export default function Chat() {
                                 {/* <Input placeholder="Ejemplo: Laborum, trabajando.com, etc." /> */}
                                 <p className="text-xs font-light">Ingresa las metodologías que utilizas separadas por comas</p>
                                 <div className="flex space-x-2 mt-2">
-                                    <Badge onClick={handleBadgeDel} color="yellow" name="LinkedIn Recruiter" />
+                                    {/* <Badge onClick={handleBadgeDel} color="yellow" name="LinkedIn Recruiter" /> */}
                                 </div>
                             </div>
                         </div>

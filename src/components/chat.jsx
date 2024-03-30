@@ -16,6 +16,11 @@ export default function Chat() {
         // Clear the input field, simulate response
         }
     };
+
+    function populateChat(messages) {
+        // function to load messages onto the chat, or show info when empty
+    }
+
     return <>
 
         {/* Chat gpt grimoire */}
