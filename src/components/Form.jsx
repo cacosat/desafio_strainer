@@ -5,17 +5,15 @@ import Badge from "./Badge";
 import rightBlue from "../assets/rightBlue.svg"
 
 export default function Chat() {
-    // hooks + helper function
-    const handleBadgeDel = (e) => {
-        e.preventDefault();
-        const badgeName = e.target.innerText;
-    }
+    const {register, handleSubmit, formState: {errors}} = useForm();
+
+    const onSubmit = (formData) => console.log(formData);
 
     {/* TODO form validation and submission with react-hook-form */}
 
     return <>
         <div className="flex flex-col items-center m-4 overflow-x-hidden">
-            <form className="flex flex-col gap-8">
+            <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}> {/* handleSubmit validates inputs before calling on Submit */}
                 <div className="flex flex-col px-4 sm:px-8 py-4 sm:py-8 gap-16 max-w-[800px] text-left text-darker-gray bg-light-gray rounded-[25px] ">
                     <section aria-labelledby="personal-information-section" className="flex flex-col gap-8"> {/* Accesibility */}
                         <h2 className="text-2xl font-semibold" id="personal-information-section">
