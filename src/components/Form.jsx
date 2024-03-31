@@ -7,12 +7,25 @@ import rightBlue from "../assets/rightBlue.svg"
 export default function Chat() {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
-    const onSubmit = (formData) => {
-        console.log('onSubmit function executed');
-        console.log(formData);
+    const onSubmit = async (formData) => {
+        try {
+            const response = await fetch('SERVER_ENDPOINT', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            alert('Se envió el formulario');
+        } catch (error) {
+            console.error('Error :', error);
+            alert('Hubo un problema al enviar el formulario, intentalo de nuevo.');
+        }
     }
-
-    {/* TODO form validation and submission with react-hook-form */}
 
     return <>
         <div className="flex flex-col items-center m-4 overflow-x-hidden">
