@@ -12,14 +12,7 @@ export default function Chat() {
     const {register, handleSubmit, reset, formState: {errors}} = useForm();
 
     async function fetchResponse(message) {
-        // const request = message;
-        try {
-            const response = await fetch('openai', request);
-            const data = await response.json()
-            // return only message from data json
-        } catch(err) {
-            console.error({'Failed to fetch bot response': err})
-        }
+        // fetch bot response for the user message
     }
 
     const sendMessage = async (data) => {
@@ -53,7 +46,11 @@ export default function Chat() {
                         </div>
                     </div>
                 </div>
-                <button className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
+                <button className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]" 
+                        onClick={() => {
+                            setMessages([]);
+                        }}
+                >
                     <img src={restart} alt="restart conversation" />
                 </button>
             </div>
@@ -80,13 +77,17 @@ export default function Chat() {
                             name="userMessage" 
                             placeholder="Escribe tu mensaje..." 
                             className="flex-1 px-5 py-3 placeholder-dark-gray text-darker-gray rounded-full bg-white border-gray border-2" 
-                            {...register('userMessage', {required: true})}
+                            {...register('userMessage', {required: {
+                                value: true,
+                                message: 'Debes escribir un mensaje antes de enviarlo.'
+                            }})}
                     />
                     <button type="submit" className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
                     {/* Insert send icon here */}
                         <img src={send} alt="send message" />
                     </button>
                 </div>
+                {errors.userMessage && <p className=" text-[#DC2626] text-xs">{errors.userMessage.message}</p>}
             </form>
         </div>
     </>
