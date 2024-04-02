@@ -13,18 +13,24 @@ export default function Chat() {
 
     async function fetchResponse(message) {
         // fetch bot response for the user message
+        return 'bot response'
     }
 
     const sendMessage = async (data) => {
         const message = data.userMessage;
         if (message.trim() !== '') {
-            setMessages([...messages, { content: message, sender: 'user' }]);
+            console.log('message is:' + message)
+            setMessages(currentMessages => [...currentMessages, { content: message, sender: 'user' }]);
             // AI Response:
             const response = await fetchResponse(message);
-            setMessages([...messages, { content: response, sender: 'bot' }]);
+            setMessages(currentMessages => [...currentMessages, { content: response, sender: 'bot' }]);
             reset(); // reset input
         }
     };
+
+    useEffect(() => {
+        console.log('Updated messages:', messages);
+    }, [messages]); // This effect runs every time 'messages' changes.
 
     return <>
 
