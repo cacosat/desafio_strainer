@@ -1,25 +1,37 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import restart from '../assets/restart.svg'
-import smartupAgent from '../assets/smartup_agent.svg'
-import send from '../assets/send.svg'
+import { useForm } from 'react-hook-form';
+import restart from '../assets/restart.svg';
+import smartupAgent from '../assets/smartup_agent.svg';
+import send from '../assets/send.svg';
 
 
 export default function Chat() {
     // State for storing messages
     const [messages, setMessages] = useState([]);
+    const {register, handleSubmit, reset, formState: {errors}} = useForm();
 
-    // Function to handle sending messages
-    const sendMessage = (message) => {
+    async function fetchResponse(message) {
+        // const request = message;
+        try {
+            const response = await fetch('openai', request);
+            const data = await response.json()
+            // return only message from data json
+        } catch(err) {
+            console.error({'Failed to fetch bot response': err})
+        }
+    }
+
+    const sendMessage = async (data) => {
+        const message = data.userMessage;
         if (message.trim() !== '') {
-        setMessages([...messages, { content: message, sender: 'user' }]);
-        // Clear the input field, simulate response
+            setMessages([...messages, { content: message, sender: 'user' }]);
+            // AI Response:
+            const response = await fetchResponse(message);
+            setMessages([...messages, { content: response, sender: 'bot' }]);
+            reset(); // reset input
         }
     };
-
-    function populateChat(messages) {
-        // function to load messages onto the chat, or show info when empty
-    }
 
     return <>
 
@@ -59,16 +71,17 @@ export default function Chat() {
 
             {/* Bottom bar */}
             <form className="" 
-                    onSubmit={(e) => { 
-                        e.preventDefault(); 
-                        sendMessage(e.target.messageInput.value); 
-                        e.target.reset(); 
-                    }}>
+                    onSubmit={handleSubmit(sendMessage)}>
                 <div className="text-black">
                     pendiente los chips de respuesta
                 </div>
                 <div className="flex items-center justify-between gap-4 bg-blue rounded-[50px] p-5">
-                    <input type="text" name="messageInput" placeholder="Escribe tu mensaje..." className="flex-1 px-5 py-3 placeholder-dark-gray text-darker-gray rounded-full bg-white border-gray border-2" />
+                    <input type="text" 
+                            name="userMessage" 
+                            placeholder="Escribe tu mensaje..." 
+                            className="flex-1 px-5 py-3 placeholder-dark-gray text-darker-gray rounded-full bg-white border-gray border-2" 
+                            {...register('userMessage', {required: true})}
+                    />
                     <button type="submit" className="bg-dark-blue rounded-full p-2 w-[48px] h-[48px]">
                     {/* Insert send icon here */}
                         <img src={send} alt="send message" />
