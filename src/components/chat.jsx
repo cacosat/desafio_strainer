@@ -21,6 +21,14 @@ export default function Chat() {
         }
     }, [messages])
 
+    useEffect(() => {
+        setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+      }
+    }, 10);
+    }, [messages])
+
     async function fetchResponse(message) {
         // fetch bot response for the user message
         return 'Respuesta Placeholder'
@@ -29,18 +37,11 @@ export default function Chat() {
     const sendMessage = async (data) => {
         const message = data.userMessage;
         if (message.trim() !== '') {
-            console.log('message is:' + message)
             setMessages(currentMessages => [...currentMessages, { content: message, sender: 'user' }]);
             // AI Response:
             const response = await fetchResponse(message);
             setMessages(currentMessages => [...currentMessages, { content: response, sender: 'bot' }]);
             reset(); // reset input
-            
-            setTimeout(() => {
-                if (textareaRef.current) {
-                    textareaRef.current.focus();
-                }
-            }, 0);
         }
     };
 
