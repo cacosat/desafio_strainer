@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import heroImg from './assets/heroImg.png'
@@ -10,6 +10,13 @@ import './App.css'
 
 function App() {
   const [messages, setmessages] = useState([])
+  const formRef = useRef(null);
+
+  const scrollToForm = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth' }); // Use 'smooth' for smooth scrolling
+    }
+  };
 
   return <>
       <div className='flex flex-col gap-8 w'>
@@ -31,10 +38,12 @@ function App() {
         <div className='bg-blue w-screen p-6 flex flex-col sm:flex-row items-center justify-center gap-8'>
           <img src={logoStrainer} alt="strainer logo" className='hidden sm:inline' />
           <p className='text-xl max-w-[40ch]'>Una vez que el agente complete tu formulario podrás revisarlo y enviarlo</p>
-          <button className="bg-white text-blue py-2 px-8 rounded-full">Revisa tu formulario</button>
+          <button onClick={scrollToForm} className="bg-white text-blue hover:border-[1px] border-white py-2 px-8 rounded-full">Revisa tu formulario</button>
         </div>
 
-        <Form />
+        <div ref={formRef}>
+          <Form />
+        </div>
 
 
       </div>
