@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import heroImg from './assets/heroImg.png'
 import logoStrainer from './assets/logo_strainer.png'
+import header from './assets/header.png'
 import Chat from './components/Chat'
 import Form from './components/Form'
 import './App.css'
@@ -12,6 +13,9 @@ function App() {
 
   return <>
       <div className='flex flex-col gap-8 w'>
+        <div className='flex justify-center'>
+          <img src={header} alt="header strainer"  />
+        </div>
         {/* Body */}
 
 
