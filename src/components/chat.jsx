@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import restart from '../assets/restart.svg';
 import smartupAgent from '../assets/smartup_agent.svg';
+import botAvatar from '../assets/botAvatar.png';
+import userAvatar from '../assets/userAvatar.png';
 import send from '../assets/send.svg';
 
 
@@ -37,17 +39,15 @@ export default function Chat() {
     const sendMessage = async (data) => {
         const message = data.userMessage;
         if (message.trim() !== '') {
-            setMessages(currentMessages => [...currentMessages, { content: message, sender: 'user' }]);
+            const currentDate = new Date().toISOString();
+            setMessages(currentMessages => [...currentMessages, { content: message, sender: 'user', date: currentDate }]);
             // AI Response:
             const response = await fetchResponse(message);
-            setMessages(currentMessages => [...currentMessages, { content: response, sender: 'bot' }]);
+            setMessages(currentMessages => [...currentMessages, { content: response, sender: 'bot', date: currentDate }]);
             reset(); // reset input
+            console.log(data)
         }
     };
-
-    useEffect(() => {
-        console.log('Updated messages:', messages);
-    }, [messages]); 
 
     function adjustTextareaHeight(event) {
         const textarea = event.target;
@@ -85,11 +85,22 @@ export default function Chat() {
             </div>
 
             {/* Chat area */}
-            <div className="flex flex-col justify-start flex-1 p-4 overflow-y-auto" ref={chatContainerRef}>
+            <div className="flex flex-col gap-8 justify-start flex-1 p-4 overflow-y-auto text-left" ref={chatContainerRef}>
                     {messages.map((message, index) => (
                         <div key={index} 
-                            className={`rounded border-2 border-black p-2 ${message.sender === 'user' ? 'bg-blue-500 ml-auto' : 'bg-gray-300 mr-auto'}`}>
-                            <p className="text-black">{message.content}</p>
+                            className="flex gap-4">
+                            <div className={`bg-dark-yellow p-2 rounded-full self-end ${message.sender === 'bot' ? '' : 'hidden'}`}>
+                                <img src={botAvatar} alt="bot avatar image" />
+                            </div>
+                            <div className={`flex flex-col gap-3 px-4 py-3 rounded-t-3xl  p-2 ${message.sender === 'user' ? 'bg-blue ml-auto rounded-bl-3xl' : 'bg-yellow mr-auto rounded-br-3xl'}`}>
+                                <p className={`${message.sender === 'user' ? 'text-white self-end' : 'text-darker-gray self-start'} `}>{message.content}</p>
+                                <p className={`${message.sender === 'user' ? 'text-gray self-end' : 'text-dark-gray self-start'} text-xs`}>
+                                    {new Date(message.date).toLocaleDateString()} {new Date(message.date).toLocaleTimeString()}
+                                </p>
+                            </div>
+                            <div className={`bg-blue p-2 rounded-full self-end ${message.sender === 'user' ? '' : 'hidden'}`}>
+                                <img src={userAvatar} alt="user avatar image" />
+                            </div>
                         </div>
                     ))}
             </div>
