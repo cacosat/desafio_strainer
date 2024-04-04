@@ -49,6 +49,17 @@ export default function Chat() {
         }
     };
 
+    const handleTagClick = async (event) => {
+        const message = event.target.textContent; // Get button text content
+        if (message.trim() !== '') {
+            const currentDate = new Date().toISOString();
+            setMessages(currentMessages => [...currentMessages, { content: message, sender: 'user', date: currentDate }]);
+            // AI Response:
+            const response = await fetchResponse(message);
+            setMessages(currentMessages => [...currentMessages, { content: response, sender: 'bot', date: currentDate }]);
+        }
+    };
+
     function adjustTextareaHeight(event) {
         const textarea = event.target;
         textarea.style.height = 'auto'; // Reset the height
@@ -106,10 +117,12 @@ export default function Chat() {
             </div>
 
             {/* Bottom bar */}
-            <form className="" 
+            <form className="flex flex-col gap-2" 
                     onSubmit={handleSubmit(sendMessage)}>
-                <div className="text-black">
-                    pendiente los chips de respuesta
+                <div className="flex flex-wrap gap-2 justify-center text-black text-xs">
+                    {/* <button className="bg-white border border-blue text-blue hover:bg-light-blue py-1 px-4 rounded-full">¿Qué es The Strainer?</button> */}
+                    <button onClick={handleTagClick} className="bg-white border border-blue text-blue hover:bg-light-blue py-1 px-4 rounded-full">¿Qué información necesitas?</button>
+                    <button onClick={handleTagClick} className="bg-white border border-blue text-blue hover:bg-light-blue py-1 px-4 rounded-full">¿Cómo funciona el proceso?</button>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-4 bg-blue rounded-[50px] p-5">
                     <textarea type="text" 
