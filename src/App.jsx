@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import heroImg from './assets/heroImg.png'
 import logoStrainer from './assets/logo_strainer.png'
 import header from './assets/header.png'
-import Chat from './components/Chat'
+import Chat from './components/Chat.jsx'
 import Form from './components/Form'
 import './App.css'
 
