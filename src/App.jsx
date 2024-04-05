@@ -38,7 +38,7 @@ function App() {
         <div className='bg-blue w-screen p-6 flex flex-col sm:flex-row items-center justify-center gap-8'>
           <img src={logoStrainer} alt="strainer logo" className='hidden sm:inline' />
           <p className='text-xl max-w-[40ch]'>Una vez que el agente complete tu formulario podrás revisarlo y enviarlo</p>
-          <button onClick={scrollToForm} className="bg-white text-blue hover:border-[1px] border-white py-2 px-8 rounded-full">Revisa tu formulario</button>
+          <button onClick={scrollToForm} className="bg-white hover:bg-light-gray text-blue border-white py-2 px-8 rounded-full transition">Revisa tu formulario</button>
         </div>
 
         <div ref={formRef}>

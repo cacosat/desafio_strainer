@@ -1,30 +1,43 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import {useForm} from 'react-hook-form';
+import { useState, useEffect, useRef } from "react";
+import {useForm, Controller} from 'react-hook-form';
 import Badge from "./Badge";
 import rightBlue from "../assets/rightBlue.svg"
+import upload from '../assets/upload.png'
 
 export default function Chat() {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const fileInputRef = useRef(null);
+    const [files, setFiles] = useState(null);
+    const {control, watch, register, handleSubmit, formState: {errors}} = useForm();
+
+    const selectedFile = watch("logo");
 
     const onSubmit = async (formData) => {
-        try {
-            const response = await fetch('SERVER_ENDPOINT', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            alert('Se envió el formulario');
-        } catch (error) {
-            console.error('Error :', error);
-            alert('Hubo un problema al enviar el formulario, intentalo de nuevo.');
-        }
+        // Mock request:
+        // 
+        // try {
+        //     const response = await fetch('SERVER_ENDPOINT', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(formData),
+        //     });
+        //     if (!response.ok) {
+        //         throw new Error('Network response was not ok');
+        //     }
+        //     const data = await response.json();
+        //     alert('Se envió el formulario');
+        // } catch (error) {
+        //     console.error('Error :', error);
+        //     alert('Hubo un problema al enviar el formulario, intentalo de nuevo.');
+        // }
+
+        console.log(formData);
+    }
+
+    const handleFileUploadClick = () => {
+        fileInputRef.current.click();
     }
 
     return <>
@@ -217,7 +230,6 @@ export default function Chat() {
                                         <option value="option2">Opción 2</option>
                                         <option value="option3">Opción 3</option>
                                     </select>
-                                    {/* <p className="text-xs font-light">Selecciona una de las opciones</p> */}
                                 </div>
                                 <div className="flex flex-col grow gap-1 justify-start">
                                     <p className="text-base font-medium" >Ubicación</p>
@@ -266,13 +278,48 @@ export default function Chat() {
                                 ></textarea>
                                 <p className="text-xs font-light">Ingresa una breve descripción de la empresa</p>
                             </div>
-                            <div>
-                                logo
-                                {/* {...register('companyLogo', {
-                                                required: {
-                                                    value: false, 
-                                                }
-                                            })} */}
+                            <div className="flex flex-col gap-1">
+                                <p className="text-base font-medium">Logo de la empresa</p>
+                                <div className="">
+                                    <Controller
+                                        name="logo"
+                                        control={control}
+                                        rules={{
+                                            validate: {
+                                                size: (files) => !files[0] || (files[0] && files[0].size < 10000000) || 'El archivo no debe superar los 10MB',
+                                                type: (files) => !files[0] || (files[0] && ['image/jpeg', 'image/png', 'application/pdf'].includes(files[0].type)) || 'Debe ser JPG, PNG o PDF',
+                                            }
+                                        }}
+                                        render={({ field: { onChange, onBlur, value, ref }, fieldState: {error} }) => (
+                                            <>
+                                            <div className="border-2 border-dashed border-dark-gray bg-white rounded-lg w-full p-6 flex items-center justify-center gap-8 text-center">
+                                                <input
+                                                    type="file"
+                                                    ref={(e) => {
+                                                        ref(e);
+                                                        fileInputRef.current = e; // Assign to the useRef
+                                                    }}
+                                                    onChange={(e) => {
+                                                        onChange(e.target.files);
+                                                    }}
+                                                    onBlur={onBlur}
+                                                    hidden
+                                                    accept=".jpg,.png,.pdf"
+                                                />
+                                                <img src={upload} alt="" />
+                                                <div className="text-sm text-gray-500 grid gap-1">
+                                                    <p className="text-base">Selecciona un archivo</p>
+                                                    <p>Debe ser JPG, PNG o PDF</p>
+                                                </div>
+                                                <button type="button" onClick={handleFileUploadClick} className="bg-blue hover:bg-dark-blue active:bg-dark-blue text-white py-2 px-4 rounded-full flex items-center justify-center gap-2 transition">
+                                                    Upload
+                                                </button>
+                                            </div>
+                                            {selectedFile && selectedFile.length > 0 && <p className="font-normal text-sm mt-1">Archivo seleccionado: <span className=" italic font-semibold">{selectedFile[0].name}</span></p>}
+                                            </>
+                                        )}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -331,7 +378,7 @@ export default function Chat() {
                         </label>
                     </div>
                     {errors.terms && <p className=" text-[#DC2626] text-sm font-semibold">{errors.terms.message}</p>}
-                    <button type="submit" className="bg-blue active:bg-dark-blue text-white text-xl py-2 px-8 rounded-full flex items-center justify-center gap-2">
+                    <button type="submit" className="bg-blue hover:bg-dark-blue active:bg-dark-blue text-white text-xl py-2 px-8 rounded-full flex items-center justify-center gap-2 transition">
                         Enviar formulario
                         <div className="bg-yellow rounded-full">
                             <img src={rightBlue} alt="" />
